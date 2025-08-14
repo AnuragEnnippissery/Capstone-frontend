@@ -5,7 +5,7 @@ function App() {
 
   return (
     <>
-      <h5>Capstone</h5>
+      
       <Header/>
       <Outlet/>
         
