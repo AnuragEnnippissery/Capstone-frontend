@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     width: 200px;
-    
+    background-color: aqua;
 }
 .list{
     display:flex;
@@ -28,4 +28,33 @@
     justify-content: space-between;
     align-items: center;
     background-color: lightblue;
+}
+.container {
+  display: flex;
+  margin-top: 10px; /* push below fixed top-nav */
+  /* height: calc(100vh - 60px); */
+}
+.content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto; /* scroll if needed */
+  transition: margin-left 0.3s ease;
+}
+.Navbar.collapsed {
+  width: 70px;
+}
+
+/* Hamburger button */
+.hamburger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+  color: black;
+}
+.content-collapsed {
+  margin-left: 70px;
+}
+.user{
+    width:60px;
 }
