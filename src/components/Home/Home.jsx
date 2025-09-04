@@ -28,7 +28,7 @@ function Home(){
         <div className="searchbar">
             <input type="text"placeholder="video name" onChange={handleSearch}/>
         </div>
-        <div className="product-container">
+        <div className="video-container">
             {filteredVideos.map((vid)=>{
             return(
                     <VideoItem key={vid.id} detail={vid} />

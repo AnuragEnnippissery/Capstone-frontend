@@ -1,18 +1,46 @@
-.product-container{
+.video-container{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap:20px;
 }
-.product{
-    height: 300px;
+.video {
     width: 400px;
-    border:1px solid black;
+    border: 1px solid grey;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: lavender;
+    border-radius: 8px;
+    overflow: hidden; /* prevents content from overflowing */
+    cursor: pointer;
 }
+
+.thumbnail {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.video-info {
+    padding: 10px;
+}
+
+.title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.channel {
+    font-size: 14px;
+    color: gray;
+    margin: 2px 0;
+}
+
+.views {
+    font-size: 13px;
+    color: gray;
+}
+
 .button{
     background-color: skyblue;
     color: black;

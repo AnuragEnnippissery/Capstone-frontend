@@ -6,11 +6,15 @@ function VideoItem(props){
     return(
         <>
             <div >
-                <div className="product" onClick={HandleCardCLick}>
-                    <h3>{props.detail.title}</h3>
-                    <img src={props.detail.thumbnailUrl}alt={props.detail.title} height="300px" width="250px"/>
-                    {/* <h3>{props.detail.rating}</h3> */}
+                <div className="video" onClick={HandleCardCLick}>
                     
+                    <img  className="thumbnail"src={props.detail.thumbnailUrl}alt={props.detail.title} />
+                    <div className='video-info'>
+                        <h3 className='title'>{props.detail.title}</h3>
+                        <p className='channel'>{props.detail.channelId.channelName}</p>
+                        <p className='views'>{props.detail.views}</p>
+                    </div>
+                                                           
                      
 
                 </div>
