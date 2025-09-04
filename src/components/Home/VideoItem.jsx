@@ -1,12 +1,14 @@
 import './VideoItem.css';
+import { useNavigate } from 'react-router-dom';
 function VideoItem(props){
-    function HandleCardCLick(){
-        console.log("clicked")
+    const navigate = useNavigate();
+    function HandleCardClick(){
+        //navigate(`/VideoList/${props.detail._id}`)
     }
     return(
         <>
             <div >
-                <div className="video" onClick={HandleCardCLick}>
+                <div className="video" onClick={HandleCardClick}>
                     
                     <img  className="thumbnail"src={props.detail.thumbnailUrl}alt={props.detail.title} />
                     <div className='video-info'>
