@@ -62,6 +62,45 @@ function Header() {
           {!collapsed && <span className="label">Subscription</span>}
           </Link>
         </li>
+
+         {!collapsed && (
+          <>
+            <hr /> 
+            <li className="list-items">
+              <Link to="/">
+              <MdSubscriptions size={20} style={{ marginRight: "8px" }} />
+              <span className="label">History</span>
+              </Link>
+            </li>
+            <li className="list-items">
+              <Link to="/">
+              <MdSubscriptions size={20} style={{ marginRight: "8px" }} />
+              <span className="label">Playlists</span>
+              </Link>
+            </li>
+            <li className="list-items">
+              <Link to="/">
+              <MdSubscriptions size={20} style={{ marginRight: "8px" }} />
+              <span className="label">Watch Later</span>
+              </Link>
+            </li>
+            <li className="list-items">
+              <Link to="/">
+              <MdSubscriptions size={20} style={{ marginRight: "8px" }} />
+              <span className="label">Liked Videos</span>
+              </Link>
+            </li>
+            <p>Trending </p>
+            <hr />
+            <li className="list-items">
+              <Link to="/">
+              <MdSubscriptions size={20} style={{ marginRight: "8px" }} />
+              <span className="label">Trending</span>
+              </Link>
+            </li>
+          </>
+         )}
+
       </ul>
     </nav>
 

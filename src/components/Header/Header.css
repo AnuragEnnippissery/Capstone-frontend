@@ -1,9 +1,9 @@
 .Navbar{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     width: 200px;
-    background-color: aqua;
+    /* background-color: aqua; */
 }
 .list{
     display:flex;
@@ -57,4 +57,9 @@
 }
 .user{
     width:60px;
+}
+hr {
+  border: none;
+  border-top: 1px solid #ccc; /* light gray line */
+  margin: 8px 0;              /* spacing above & below */
 }
