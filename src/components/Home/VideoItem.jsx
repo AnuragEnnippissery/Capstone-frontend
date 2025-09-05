@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 function VideoItem(props){
     const navigate = useNavigate();
     function HandleCardClick(){
-        //navigate(`/VideoList/${props.detail._id}`)
+        navigate(`/VideoPlayer/${props.detail._id}`)
     }
     return(
         <>

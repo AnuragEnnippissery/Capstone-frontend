@@ -26,7 +26,7 @@ export function useGetSingleVideo(id) {
   useEffect(() => {
     async function fetchVideo() {
       try {
-        const res = await fetch(`http://localhost:3100/api/videos/${id}`);
+        const res = await fetch(`http://localhost:3100/api/video/${id}`);
         const json = await res.json();
         console.log("api data",json)
         setVideo(json);
