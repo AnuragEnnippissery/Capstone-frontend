@@ -1,0 +1,158 @@
+.video-player {
+  width: 100%;
+  max-width: 1000px; /* optional: prevent it from getting too huge on big screens */
+  aspect-ratio: 16 / 9; /* keeps 16:9 ratio */
+  margin-bottom: 16px;
+}
+
+.video-player video {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.likes-section{
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    width:100px;
+    gap:2px;
+}
+.data-section{
+    display: flex;
+    justify-content: space-between;
+    width:640px;
+}
+.title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.channel {
+    font-size: 14px;
+    color: gray;
+    margin: 2px 0;
+}
+
+.views {
+    font-size: 13px;
+    color: gray;
+}
+.video-description {
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 10px;
+  width: 100%;           /* take full width of parent */
+  max-width: 640px;      /* don’t stretch beyond 640px on big screens */
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+/* Recommendation.css */
+.display-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px; 
+  align-items: flex-start;
+  flex-wrap: wrap; /* help with small screens */
+}
+
+.main-video-section {
+  flex: 2;
+}
+
+.recommendations-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.recommendation-card {
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.recommendation-card .thumbnail {
+  width: 160px;
+  height: 90px;
+  object-fit: cover;
+}
+
+.video-info {
+  display: flex;
+  flex-direction: column;
+}
+/* ✅ Tablet (thumbnails a bit smaller) */
+@media (max-width: 1024px) {
+  .thumbnail {
+    width: 140px;
+    height: 80px;
+  }
+
+  .video-info .title {
+    font-size: 13px;
+  }
+}
+/* ✅ Mobile (stacked layout: thumbnail on top of text) */
+@media (max-width: 768px) {
+  .recommendation-card {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .thumbnail {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+  }
+
+  .video-info {
+    flex-direction: column;
+  }
+
+  .video-info .title {
+    font-size: 14px;
+  }
+}
+
+/* ✅ Tablet view (stack recommendations below video) */
+@media (max-width: 1024px) {
+  .display-container {
+    flex-direction: column;
+  }
+
+  .main-video-section {
+    width: 100%;
+  }
+
+  .recommendations-section {
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+/* ✅ Mobile view (everything full width stacked) */
+@media (max-width: 768px) {
+  .display-container {
+    padding: 10px;
+  }
+
+  .video-player video {
+    width: 100%;
+    height: auto;
+  }
+
+  .data-section {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .likes-section {
+    justify-content: flex-start;
+  }
+
+  .recommendations-section {
+    gap: 15px;
+  }
+}
