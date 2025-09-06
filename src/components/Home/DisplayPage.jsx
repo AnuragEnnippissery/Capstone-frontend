@@ -55,13 +55,17 @@ function DisplayPage() {
             <div className="comments-container">
               <h4>Comments</h4>
               <div className="comment-section">
-                <input type="text" placeholder="add a new comment" />
+                <input className="comment-input"type="text" placeholder="add a new comment" />
                 <button>Upload</button>
               </div>
               {video.comments.map((comment) => (
                 <div key={comment._id} className="comment">
                   <h4>{comment.user.username}</h4>
-                  <p>{comment.text}</p>
+                  <div className="comment-display">
+                      <p className="comment-input">{comment.text}</p>
+                      <button>Edit</button>
+                  </div>
+                  
                 </div>
               ))}
             </div>

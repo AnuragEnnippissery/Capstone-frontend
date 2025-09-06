@@ -6,6 +6,10 @@ import { MdSubscriptions } from "react-icons/md";
 import { BiMoviePlay } from "react-icons/bi"; // using for Shorts
 import { FiMenu } from "react-icons/fi";
 import { useState ,useEffect} from "react";
+import { MdWorkHistory } from "react-icons/md";
+import { RiPlayListAddFill } from "react-icons/ri";
+import { MdWatchLater } from "react-icons/md";
+import { TbFileLike } from "react-icons/tb";
 
 function Header() {
     let navigate=useNavigate()
@@ -39,7 +43,7 @@ function Header() {
         </div>
 
     <div className="container">
-        <nav className={`Navbar ${collapsed ? "collapsed" : ""}`}>
+        <nav className={`Navbar ${collapsed ? "collapsed" : "" }`}>
         <button className="hamburger" onClick={() => setCollapsed(!collapsed)}>
           <FiMenu size={24} />
         </button>
@@ -68,25 +72,25 @@ function Header() {
             <hr /> 
             <li className="list-items">
               <Link to="/">
-              <MdSubscriptions size={20} style={{ marginRight: "8px" }} />
+              <MdWorkHistory size={20} style={{ marginRight: "8px" }} />
               <span className="label">History</span>
               </Link>
             </li>
             <li className="list-items">
               <Link to="/">
-              <MdSubscriptions size={20} style={{ marginRight: "8px" }} />
+              <RiPlayListAddFill size={20} style={{ marginRight: "8px" }} />
               <span className="label">Playlists</span>
               </Link>
             </li>
             <li className="list-items">
               <Link to="/">
-              <MdSubscriptions size={20} style={{ marginRight: "8px" }} />
+              <MdWatchLater size={20} style={{ marginRight: "8px" }} />
               <span className="label">Watch Later</span>
               </Link>
             </li>
             <li className="list-items">
               <Link to="/">
-              <MdSubscriptions size={20} style={{ marginRight: "8px" }} />
+              <TbFileLike size={20} style={{ marginRight: "8px" }} />
               <span className="label">Liked Videos</span>
               </Link>
             </li>
