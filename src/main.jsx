@@ -8,6 +8,8 @@ import Login from './components/Authentication/Login.jsx'
 import Register from './components/Authentication/Register.jsx'
 import Home from './components/Home/Home.jsx'
 import DisplayPage from './components/Home/DisplayPage.jsx'
+import { Provider } from 'react-redux'
+import appStore from './utils/appstore.js'
 
 const appRouter = createBrowserRouter([
   {
@@ -44,7 +46,9 @@ const appRouter = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={appRouter}/>
+    <Provider store={appStore}>
+        <RouterProvider router={appRouter}/>
+    </Provider>
       
     
     
