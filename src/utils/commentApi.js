@@ -11,3 +11,8 @@ export const editComment = async (id, updatedData) => {
   const res = await axios.put(`${API_URL}/update/${id}`, updatedData);
   return res.data.populatedComment;
 };
+
+export const removeComment =async(id) => {
+  const res =await axios.delete(`${API_URL}/delete/${id}`);
+  return res.data.deletedComment;
+}

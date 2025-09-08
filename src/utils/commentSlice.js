@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { addComment,editComment } from "./commentApi";
+import { addComment,editComment,removeComment } from "./commentApi";
 
 // Add Comment
 export const createComment = createAsyncThunk(
@@ -16,6 +16,13 @@ export const updateComment = createAsyncThunk(
     return await editComment(id, updatedData);
   }
 );
+
+//delete Comment 
+export const deleteComment = createAsyncThunk("comments/delete",
+  async ({id}) =>{
+    return await removeComment(id);
+  }
+)
 
 const commentSlice = createSlice({
   name: "comments",
@@ -48,6 +55,21 @@ const commentSlice = createSlice({
         const idx = state.comments.findIndex((c) => c._id === action?.payload?._id);
         if (idx !== -1){
            state.comments[idx] = action.payload;}
+      })
+      //remove
+      .addCase(deleteComment.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(deleteComment.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        // remove deleted comment from state
+       state.comments = state.comments.filter(
+              (c) => c._id !== action.payload._id // ✅ match against deleted comment’s id
+  );
+      })
+      .addCase(deleteComment.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
       });
   },
 });

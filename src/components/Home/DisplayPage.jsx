@@ -4,7 +4,7 @@ import "./DisplayPage.css";
 import { BiLike, BiDislike } from "react-icons/bi";
 import Recommendations from "../../utils/recommendation";
 import { useDispatch, useSelector } from "react-redux";
-import { setComments,createComment,updateComment } from "../../utils/commentSlice";
+import { setComments,createComment,updateComment, deleteComment } from "../../utils/commentSlice";
 import { useEffect,useState } from "react";
 
 function DisplayPage() {
@@ -67,7 +67,16 @@ useEffect(() => {
       alert("Failed to update comment");
     }
 }
-
+  async function HandleDelete(commentId){
+    const deleteAction = await dispatch(
+      deleteComment({id:commentId}))
+      if(deleteComment.fulfilled.match(deleteAction)){
+        console.log("comment deleted")
+      }
+      else{
+        alert("failed to delete");
+      }
+  }
   return (
     <div className="display-container">
       {video ? (
@@ -155,6 +164,7 @@ useEffect(() => {
                       }}>
                         Edit
                       </button>
+                      <button onClick={() => HandleDelete(com._id)}>Delete</button>
                     </div>
                   )}
                 </div>
