@@ -11,6 +11,7 @@ import DisplayPage from './components/Home/DisplayPage.jsx'
 import { Provider } from 'react-redux'
 import appStore from './utils/appstore.js'
 import ChannelPage from './components/Channel/ChannelPage.jsx'
+import ChannelCreationForm from './components/Channel/ChannelCreationForm.jsx'
 
 const appRouter = createBrowserRouter([
   {
@@ -40,6 +41,9 @@ const appRouter = createBrowserRouter([
     },
     {
       path:'/Channel',element:<ChannelPage/>
+    },
+    {
+      path:'/Channel/ChannelForm',element:<ChannelCreationForm/>
     }
   ],
   

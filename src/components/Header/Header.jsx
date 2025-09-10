@@ -40,6 +40,7 @@ function Header() {
       sessionStorage.removeItem("token");
 
       window.dispatchEvent(new Event("storage")); // 👈 update Header
+      navigate('/Login')
     }
 
   return (

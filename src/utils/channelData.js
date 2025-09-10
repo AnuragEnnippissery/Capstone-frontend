@@ -54,3 +54,25 @@ export function useGetMyChannel() {
   return channel;
 }
 
+// add channel
+export async function createChannel(channelData) {
+  try {
+    const token = sessionStorage.getItem("token");
+
+    const res = await fetch("http://localhost:3100/api/channel/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // protect endpoint
+      },
+      body: JSON.stringify(channelData),
+    });
+
+    if (!res.ok) throw new Error(`Error: ${res.status}`);
+    return await res.json();
+  } catch (err) {
+    console.error("Create channel error:", err);
+    throw err;
+  }
+}
+
