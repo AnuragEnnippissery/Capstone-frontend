@@ -10,6 +10,7 @@ import Home from './components/Home/Home.jsx'
 import DisplayPage from './components/Home/DisplayPage.jsx'
 import { Provider } from 'react-redux'
 import appStore from './utils/appstore.js'
+import ChannelPage from './components/Channel/ChannelPage.jsx'
 
 const appRouter = createBrowserRouter([
   {
@@ -36,6 +37,9 @@ const appRouter = createBrowserRouter([
     },
     {
       path:'/Register',element:<Register/>
+    },
+    {
+      path:'/Channel',element:<ChannelPage/>
     }
   ],
   

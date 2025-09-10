@@ -4,14 +4,22 @@ import { useDispatch } from "react-redux";
 import VideoItem from "./VideoItem";
 import './VideoItem.css';
 import './Home.css';
+import { useLocation } from "react-router-dom";
 function Home(){
     let data=useGetData()
     console.log("video data",data)
     const [filteredVideos,setFilteredVideos] = useState([]);
+    const location = useLocation();
+    const params = new URLSearchParams(location.search);
+    const filter = params.get("filter");  // "shorts" if clicked from sidebar
+
     useEffect(() => {
-        setFilteredVideos(data); // set initial filtered list when data is loaded
-        console.log("filter",filteredVideos)
-    }, [data]);
+        if (filter) {
+        HandleFilterVideos(filter);
+        } else {
+        setFilteredVideos(data);
+        }
+    }, [data, filter]);
 
     function HandleFilterVideos(category){
         const newVideos=data.filter(video=>video.category==category)

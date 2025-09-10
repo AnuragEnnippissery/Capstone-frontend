@@ -17,15 +17,30 @@ function Header() {
     const [user, setUser] = useState("");
 
     useEffect(() => {
+      function checkUser() {
         const storedUser = sessionStorage.getItem("username");
-        if (storedUser) {
-            setUser(storedUser);
-        }
+        setUser(storedUser);
+      }
+
+      checkUser(); // run on mount
+      window.addEventListener("storage", checkUser);
+
+      return () => {
+        window.removeEventListener("storage", checkUser);
+      };
     }, []);
+
 
   function HandleClick(){
     navigate('/Login')
   }
+  function HandleSignOut() {
+      sessionStorage.removeItem("id");
+      sessionStorage.removeItem("username");
+      sessionStorage.removeItem("token");
+
+      window.dispatchEvent(new Event("storage")); // 👈 update Header
+    }
 
   return (
     <div>
@@ -33,7 +48,11 @@ function Header() {
           <h2>Youtube</h2>
           <div className="user">
                {user ? (
-                  <p> {user}!</p> // show username if logged in
+                  <div>
+                     <p> {user}!</p> 
+                     <button onClick={HandleSignOut}>Sign Out</button>
+                  </div>
+                 
                 ) : (
                   <button onClick={HandleClick}>Sign In</button> // show sign in button only if no user
                 )}
@@ -55,13 +74,13 @@ function Header() {
           </Link>
         </li>
         <li className="list-items">
-          <Link to="/">
+          <Link to="/?filter=shorts">
           <BiMoviePlay size={20} style={{ marginRight: "8px" }} />
           {!collapsed && <span className="label">Shorts</span>}
           </Link>
         </li>
         <li className="list-items">
-          <Link to="/">
+          <Link to="/Channel">
           <MdSubscriptions size={20} style={{ marginRight: "8px" }} />
           {!collapsed && <span className="label">Subscription</span>}
           </Link>
