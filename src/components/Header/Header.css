@@ -63,3 +63,74 @@ hr {
   border-top: 1px solid #ccc; /* light gray line */
   margin: 8px 0;              /* spacing above & below */
 }
+
+/* Tablet & mobile responsiveness */
+@media (max-width: 1024px) {
+  .Navbar {
+    position: fixed;
+    top: 50px;          /* below your top-nav */
+    left: -200px;       /* hidden off-screen */
+    height: 100vh;
+    background-color: white;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    transition: left 0.3s ease;
+    z-index: 1000;
+  }
+
+  .Navbar.collapsed {
+    left: 0;            /* slide in when toggled */
+    width: 200px;
+  }
+
+  .hamburger {
+    display: block;     /* show hamburger only on smaller screens */
+  }
+
+  .content {
+    margin-left: 0 !important; /* don’t push content when sidebar is hidden */
+  }
+}
+
+/* Small mobile tweaks */
+@media (max-width: 600px) {
+  .list-items {
+    padding: 8px;
+    margin: 6px;
+  }
+  .label {
+    font-size: 14px;
+  }
+}
+
+.avatar-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.avatar {
+  background-color:lightgreen;
+  color: black;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+}
+
+.popup {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+  z-index: 10;
+  width:150px;
+}
+

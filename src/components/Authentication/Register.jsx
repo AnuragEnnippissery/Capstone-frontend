@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 function Register(){
     let [username,setUsername]=useState("");
     let [password,setPassword]=useState("");
+    let [email,setEmail]=useState("")
     let navigate=useNavigate();
     async function HandleLogin(){
         console.log("username",username);
@@ -15,7 +16,7 @@ function Register(){
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ username, password })
+            body: JSON.stringify({ username, email,password })
         })
         //const data = await res.json();
         //console.log(data);
@@ -40,6 +41,9 @@ function Register(){
             <h2>Register</h2>
             <input type="text"id="username" placeholder="username" value={username}
              onChange={(e)=>{setUsername(e.target.value)}} style={{ margin: "10px", padding: "8px" }}></input>
+             <br/>
+             <input type="text"id="email" placeholder="email" value={email}
+             onChange={(e)=>{setEmail(e.target.value)}} style={{ margin: "10px", padding: "8px" }}></input>
              <br/>
             <input type="text" id="password" placeholder="password" value={password}
              onChange={(e)=>{setPassword(e.target.value)}} style={{ margin: "10px", padding: "8px" }}></input>

@@ -85,11 +85,23 @@ useEffect(() => {
           <div className="main-video-section">
             {/* Video Player */}
             <div className="video-player">
-              <video key={id}  controls>
-                <source src={video.videoUrl} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </div>
+                {video.videoUrl.includes("youtube.com") ? (
+                  <iframe
+                    key={id}
+                    src={`https://www.youtube.com/embed/${new URL(video.videoUrl).searchParams.get("v")}`}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    title={video.title}
+                  ></iframe>
+                ) : (
+                  <video key={id} controls>
+                    <source src={video.videoUrl} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                )}
+              </div>
+
 
             {/* Video Info */}
             <section>

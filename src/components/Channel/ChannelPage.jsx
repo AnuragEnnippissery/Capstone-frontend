@@ -9,6 +9,9 @@ function ChannelPage() {
   function HandleChannel(){
     navigate("/channel/channelForm")
   }
+  function HandleVideo(){
+    navigate("/channel/VideoForm")
+  }
 
   console.log("channel", channel);
 
@@ -47,7 +50,11 @@ function ChannelPage() {
                 </li>
               ))
             ) : (
+              <>
               <p>No videos uploaded yet.</p>
+              <button onClick={HandleVideo}>create a video</button>
+              </>
+              
             )}
           </div>
         </div>

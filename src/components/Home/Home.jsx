@@ -9,6 +9,7 @@ function Home(){
     let data=useGetData()
     console.log("video data",data)
     const [filteredVideos,setFilteredVideos] = useState([]);
+    //console.log("filter",filteredVideos)
     const location = useLocation();
     const params = new URLSearchParams(location.search);
     const filter = params.get("filter");  // "shorts" if clicked from sidebar

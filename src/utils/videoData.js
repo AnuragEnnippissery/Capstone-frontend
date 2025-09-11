@@ -6,7 +6,12 @@ function useGetData() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch("http://localhost:3100/api/videos");
+        const token = sessionStorage.getItem("token");
+        const res = await fetch("http://localhost:3100/api/videos", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const json = await res.json();
         console.log("data", json);
         setData(json);
@@ -26,7 +31,12 @@ export function useGetSingleVideo(id) {
   useEffect(() => {
     async function fetchVideo() {
       try {
-        const res = await fetch(`http://localhost:3100/api/video/${id}`);
+        const token = sessionStorage.getItem("token");
+        const res = await fetch(`http://localhost:3100/api/video/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const json = await res.json();
         console.log("api data",json)
         setVideo(json);
