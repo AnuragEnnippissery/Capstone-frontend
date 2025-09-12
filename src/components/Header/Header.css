@@ -133,4 +133,15 @@ hr {
   z-index: 10;
   width:150px;
 }
-
+@media (max-width: 1024px) {
+  .hamburger {
+    display: block;     
+    position: fixed;    /* stick to viewport */
+    top: 60px;          /* just below your .top-nav (adjust if nav height changes) */
+    left: 10px;         /* stick to the left edge */
+    padding: 8px;
+    background: white;  /* give it a background so it’s visible */
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+}

@@ -6,7 +6,8 @@ import {useState,useEffect} from "react";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import './ChannelPage.css';
-import { useGetMyChannel } from "../../utils/channelData";
+import { deleteChannel, useGetMyChannel } from "../../utils/channelData";
+import { toast } from "react-toastify";
 
 
 function ChannelPage() {
@@ -33,8 +34,27 @@ function ChannelPage() {
       try {
         await deleteVideo(id);
         setVideos(videos.filter((v) => v._id !== id)); // update local state
+         toast.success("video deleted successfully", {
+                position: "top-right",
+                autoClose: 3000,
+              });
       } catch (err) {
         console.error("Delete error:", err);
+      }
+    }
+    async function handleDeleteChannel(id) {
+      if (!window.confirm("Are you sure you want to delete this channel?")) return;
+
+      try {
+        await deleteChannel(id);
+        // After deleting, either reset UI or navigate
+        navigate("/"); // go back to homepage
+        toast.success("channel deleted successfully", {
+                position: "top-right",
+                autoClose: 3000,
+              });
+      } catch (err) {
+        console.error("Delete channel error:", err);
       }
     }
 
@@ -57,6 +77,7 @@ function ChannelPage() {
           {/* Channel Info */}
           <h1>{channel.channelName}</h1>
           <button onClick={() => navigate(`/Channel/EditChannelForm/${channel._id}`)}>{<MdEdit/>}</button>
+           <button onClick={()=>handleDeleteChannel(channel._id)}>{<MdDelete/>}</button>
           <p>{channel.description}</p>
 
           {/* Videos Section */}

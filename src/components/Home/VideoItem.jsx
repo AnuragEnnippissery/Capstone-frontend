@@ -14,7 +14,7 @@ function VideoItem(props){
                     <div className='video-info'>
                         <h3 className='title'>{props.detail.title}</h3>
                         <p className='channel'>{props.detail.channelId.channelName}</p>
-                        <p className='views'>{props.detail.views}</p>
+                        <p className='views'>{props.detail.views} Views</p>
                     </div>
                                                            
                      

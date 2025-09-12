@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 
 function Header() {
   let navigate = useNavigate();
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(window.innerWidth <= 1024);
   const [user, setUser] = useState("");
   const [popupOpen, setPopupOpen] = useState(false);
 
@@ -38,7 +38,21 @@ function Header() {
       }
       return () => clearTimeout(timer);
     }, [popupOpen]);
+      // collapsed = true means sidebar is hidden
+  // const [collapsed, setCollapsed] = useState(window.innerWidth <= 1024);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 1024) {
+        setCollapsed(true);   // hide sidebar on mobile/tablet
+      } else {
+        setCollapsed(false);  // show sidebar on desktop
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   function HandleClick() {
     navigate('/Login');
