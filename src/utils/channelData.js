@@ -76,3 +76,31 @@ export async function createChannel(channelData) {
   }
 }
 
+//edit channel
+export async function updateChannel(id, updatedData) {
+  const token = sessionStorage.getItem("token");
+  const res = await fetch(`http://localhost:3100/api/channel/update/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(updatedData),
+  });
+  if (!res.ok) throw new Error(`Error: ${res.status}`);
+  return await res.json();
+}
+
+// delete channel
+export async function deleteChannel(id) {
+  const token = sessionStorage.getItem("token");
+  const res = await fetch(`http://localhost:3100/api/channel/delete/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!res.ok) throw new Error(`Error: ${res.status}`);
+  return await res.json();
+}
+

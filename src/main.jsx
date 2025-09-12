@@ -2,6 +2,8 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {  RouterProvider } from 'react-router-dom'
 import { createBrowserRouter } from 'react-router-dom'
 import Login from './components/Authentication/Login.jsx'
@@ -14,6 +16,7 @@ import ChannelPage from './components/Channel/ChannelPage.jsx'
 import ChannelCreationForm from './components/Channel/ChannelCreationForm.jsx'
 import VideoCreationForm from './components/Channel/VideoCreationForm.jsx'
 import EditVideoForm from './components/Channel/EditVideoForm.jsx'
+import ChannelEditForm from './components/Channel/ChannelEditForm.jsx';
 
 const appRouter = createBrowserRouter([
   {
@@ -52,7 +55,11 @@ const appRouter = createBrowserRouter([
     },
     {
       path:'/Channel/EditVideoForm/:id',element:<EditVideoForm/>
-    }
+    },
+    {
+      path:'/Channel/EditChannelForm/:id',element:<ChannelEditForm/>
+    },
+    
   ],
   
   },
@@ -64,6 +71,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={appStore}>
         <RouterProvider router={appRouter}/>
+        <ToastContainer/>
     </Provider>
       
     

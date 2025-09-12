@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
 import "./ChannelCreationForm.css";
-import { createChannel } from "../../utils/channelData";
+//import { use } from "../../utils/channelData";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { updateChannel } from "../../utils/channelData";
 
-function ChannelCreationForm() {
+
+function ChannelEditForm() {
   const [channelName, setChannelName] = useState("");
   const [description, setDescription] = useState("");
-  const [banner, setBanner] = useState("");
+  const [channelBanner, setChannelBanner] = useState("");
   const navigate = useNavigate();
   const [userId, setUserId] = useState("");
+  const[channel,setChannel]=useState(null)
+  //const myChannel =useGetMyChannel()
   
 
   useEffect(() => {
@@ -20,27 +24,20 @@ function ChannelCreationForm() {
   }, []);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const newChannel = await createChannel({
-        channelName,
-        description,
-        channelBanner: banner,
-        owner: userId, // ✅ use userId instead of storedUser
-        videoUrl
-      });
-      console.log("Channel created:", newChannel);
-      navigate("/channel");
-       toast.success("channel created successfully", {
-          position: "top-right",
-          autoClose: 3000,
-        });
-    } catch (err) {
-      console.error("Error creating channel:", err);
-      toast.error("channel not created");
-      //alert("Error creating channel, check console for details.");
-    }
-  };
+      e.preventDefault();
+      try {
+        await updateChannel(id, channel); // send updated channel object
+        navigate("/channel"); // go back to channel page
+        toast.success("channel edited successfully", {
+                  position: "top-right",
+                  autoClose: 3000,
+                });
+      } catch (err) {
+        console.error("Update error:", err);
+        toast.error("channel edit has failed");
+        //alert("Error updating video");
+      }
+    };
 
   return (
     <div className="channel-form-container">
@@ -51,7 +48,7 @@ function ChannelCreationForm() {
           <input
             type="text"
             value={channelName}
-            onChange={(e) => setChannelName(e.target.value)}
+            onChange={(e) => setChannelName({...channel,channelName:e.target.value})}
             required
           />
         </div>
@@ -59,15 +56,15 @@ function ChannelCreationForm() {
           <label>Description</label>
           <textarea
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e) => setDescription({...channel,description:e.target.value})}
           />
         </div>
         <div className="form-group">
           <label>Banner URL</label>
           <input
             type="text"
-            value={banner}
-            onChange={(e) => setBanner(e.target.value)}
+            value={channelBanner}
+            onChange={(e) => setChannelBanner({...channel,channelBanner:e.target.value})}
           />
         </div>
         
@@ -79,4 +76,4 @@ function ChannelCreationForm() {
   );
 }
 
-export default ChannelCreationForm;
+export default ChannelEditForm;

@@ -4,6 +4,7 @@ import "./ChannelCreationForm.css";
 import { useGetMyChannel } from "../../utils/channelData";
 import { createVideo } from "../../utils/videoData";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function VideoCreationForm() {
   const [videoName, setVideoName] = useState("");
@@ -36,9 +37,14 @@ function VideoCreationForm() {
       console.log("Video created:", newVideo);
 
       navigate("/channel");
+      toast.success("video created successfully", {
+                position: "top-right",
+                autoClose: 3000,
+              });
     } catch (err) {
       console.error("Error creating video:", err);
-      alert("Error creating video, check console for details.");
+      //alert("Error creating video, check console for details.");
+      toast.error( "video creation failed");
     }
   };
 

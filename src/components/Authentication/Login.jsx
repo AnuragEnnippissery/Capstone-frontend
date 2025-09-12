@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {toast} from "react-toastify"
 
 function Login() {
   let [username, setUsername] = useState("");
@@ -27,9 +28,15 @@ function Login() {
 
         window.dispatchEvent(new Event("storage"));
         navigate("/");
+        toast.success(`${username} logged in `, {
+          position: "top-right",
+          autoClose: 3000,
+        });
+
       } else {
         // ❌ login failed
         setError(data.message || "Invalid username or password");
+        toast.error(data.message || "Invalid username or password!");
       }
     } catch (err) {
       console.error("Login error:", err);

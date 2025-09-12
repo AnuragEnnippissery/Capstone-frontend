@@ -1,10 +1,13 @@
-import { useGetMyChannel } from "../../utils/channelData";
+//import { useGetMyChannel } from "../../utils/channelData";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import {deleteVideo} from "../../utils/videoData";
 import {useState,useEffect} from "react";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import './ChannelPage.css';
+import { useGetMyChannel } from "../../utils/channelData";
+
 
 function ChannelPage() {
   const { id } = useParams();
@@ -17,7 +20,7 @@ function ChannelPage() {
     navigate("/channel/VideoForm")
   }
 
-  //console.log("channel", channel);
+  console.log("channel", channel);
   const [videos, setVideos] = useState([]);
 
     useEffect(() => {
@@ -53,24 +56,27 @@ function ChannelPage() {
 
           {/* Channel Info */}
           <h1>{channel.channelName}</h1>
+          <button onClick={() => navigate(`/Channel/EditChannelForm/${channel._id}`)}>{<MdEdit/>}</button>
           <p>{channel.description}</p>
 
           {/* Videos Section */}
           <h2>Videos</h2>
-          <div>
+          <div className="video-collection">
             {channel.videos && channel.videos.length > 0 ? (
               videos.map((video) => (
-                <li key={video._id}>
+                <ul>
+                <li key={video._id} className="video-card">
                   <img
                     src={video.thumbnailUrl}
                     alt={video.title}
-                    width="200"
+                    
                   />
                   <p>{video.title}</p>
                   <span>{video.views} views</span>
                   <button onClick={() => navigate(`/Channel/EditVideoForm/${video._id}`)}>{<MdEdit/>}</button>
                   <button onClick={()=>handleDelete(video._id)}>{<MdDelete/>}</button>
                 </li>
+                </ul>
               ))
             ) : (
               <>

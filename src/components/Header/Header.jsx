@@ -28,6 +28,18 @@ function Header() {
     };
   }, []);
 
+    // ✅ Auto close popup after 3 seconds
+    useEffect(() => {
+      let timer;
+      if (popupOpen) {
+        timer = setTimeout(() => {
+          setPopupOpen(false);
+        }, 5000); // 5 seconds
+      }
+      return () => clearTimeout(timer);
+    }, [popupOpen]);
+
+
   function HandleClick() {
     navigate('/Login');
   }

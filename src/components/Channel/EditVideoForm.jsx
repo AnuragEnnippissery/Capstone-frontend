@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { updateVideo } from "../../utils/videoData"; 
 import './EditVideoForm.css'
+import { toast } from "react-toastify";
 
 function EditVideoForm() {
   const { id } = useParams(); // get videoId from URL
@@ -34,9 +35,14 @@ function EditVideoForm() {
     try {
       await updateVideo(id, video); // send updated video object
       navigate("/channel"); // go back to channel page
+      toast.success("video edited successfully", {
+                position: "top-right",
+                autoClose: 3000,
+              });
     } catch (err) {
       console.error("Update error:", err);
-      alert("Error updating video");
+      toast.error("video edit has failed");
+      //alert("Error updating video");
     }
   };
 
