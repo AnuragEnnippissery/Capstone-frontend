@@ -6,6 +6,8 @@ import Recommendations from "../../utils/recommendation";
 import { useDispatch, useSelector } from "react-redux";
 import { setComments,createComment,updateComment, deleteComment } from "../../utils/commentSlice";
 import { useEffect,useState } from "react";
+import { MdEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 
 function DisplayPage() {
   const { id } = useParams();
@@ -174,9 +176,9 @@ useEffect(() => {
                         setEditingId(com._id);
                         setEditText(com.text);
                       }}>
-                        Edit
+                        {<MdEdit/>}
                       </button>
-                      <button onClick={() => HandleDelete(com._id)}>Delete</button>
+                      <button onClick={() => HandleDelete(com._id)}>{<MdDelete/>}</button>
                     </div>
                   )}
                 </div>

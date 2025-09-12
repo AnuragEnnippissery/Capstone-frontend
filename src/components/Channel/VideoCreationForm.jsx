@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import "./ChannelCreationForm.css";
 //import { createChannel } from "../../utils/channelData";
+import { useGetMyChannel } from "../../utils/channelData";
+import { createVideo } from "../../utils/videoData";
 import { useNavigate } from "react-router-dom";
 
 function VideoCreationForm() {
@@ -10,6 +12,7 @@ function VideoCreationForm() {
   const navigate = useNavigate();
   const [userId, setUserId] = useState("");
   const [category,setCategory] = useState("");
+  const[videoUrl,setVideoUrl]=useState("")
 
   useEffect(() => {
     const storedUser = sessionStorage.getItem("id");
@@ -17,16 +20,18 @@ function VideoCreationForm() {
       setUserId(storedUser);
     }
   }, []);
-
+  const myChannel =useGetMyChannel()
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const newVideo = await createVideo({
-        videoName,
+        title:videoName,
         description,
         thumbnailUrl: thumbnailUrl,
-        owner: userId, // ✅ use userId instead of storedUser
-        category
+        uploader: userId, // ✅ use userId instead of storedUser
+        category,
+        videoUrl,
+        channelId: myChannel._id   // <-- pass channel id from API
       });
       console.log("Video created:", newVideo);
 
@@ -63,6 +68,14 @@ function VideoCreationForm() {
             type="text"
             value={thumbnailUrl}
             onChange={(e) => setThumbnailUrl(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label>Video URL</label>
+          <input
+            type="text"
+            value={videoUrl}
+            onChange={(e) => setVideoUrl(e.target.value)}
           />
         </div>
         <div className="form-group">

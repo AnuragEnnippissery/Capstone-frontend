@@ -13,6 +13,7 @@ import appStore from './utils/appstore.js'
 import ChannelPage from './components/Channel/ChannelPage.jsx'
 import ChannelCreationForm from './components/Channel/ChannelCreationForm.jsx'
 import VideoCreationForm from './components/Channel/VideoCreationForm.jsx'
+import EditVideoForm from './components/Channel/EditVideoForm.jsx'
 
 const appRouter = createBrowserRouter([
   {
@@ -48,6 +49,9 @@ const appRouter = createBrowserRouter([
     },
     {
       path:'/Channel/VideoForm',element:<VideoCreationForm/>
+    },
+    {
+      path:'/Channel/EditVideoForm/:id',element:<EditVideoForm/>
     }
   ],
   

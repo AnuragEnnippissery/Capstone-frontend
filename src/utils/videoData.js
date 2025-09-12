@@ -51,4 +51,56 @@ export function useGetSingleVideo(id) {
   return video;
 }
 
+// add video
+export async function createVideo(videoData) {
+  try {
+    const token = sessionStorage.getItem("token");
+
+    const res = await fetch("http://localhost:3100/api/videos/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // protect endpoint
+      },
+      body: JSON.stringify(videoData),
+    });
+
+    if (!res.ok) throw new Error(`Error: ${res.status}`);
+    return await res.json();
+  } catch (err) {
+    console.error("Create video error:", err);
+    throw err;
+  }
+}
+
+//edit video 
+export async function updateVideo(id, updatedData) {
+  const token = sessionStorage.getItem("token");
+  const res = await fetch(`http://localhost:3100/api/videos/update/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(updatedData),
+  });
+  if (!res.ok) throw new Error(`Error: ${res.status}`);
+  return await res.json();
+}
+
+// videoData.js
+export async function deleteVideo(id) {
+  const token = sessionStorage.getItem("token");
+  const res = await fetch(`http://localhost:3100/api/videos/delete/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!res.ok) throw new Error(`Error: ${res.status}`);
+  return await res.json();
+}
+
+
+
 export default useGetData;

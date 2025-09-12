@@ -9,6 +9,7 @@ function ChannelCreationForm() {
   const [banner, setBanner] = useState("");
   const navigate = useNavigate();
   const [userId, setUserId] = useState("");
+  
 
   useEffect(() => {
     const storedUser = sessionStorage.getItem("id");
@@ -25,6 +26,7 @@ function ChannelCreationForm() {
         description,
         channelBanner: banner,
         owner: userId, // ✅ use userId instead of storedUser
+        videoUrl
       });
       console.log("Channel created:", newChannel);
 
@@ -63,6 +65,7 @@ function ChannelCreationForm() {
             onChange={(e) => setBanner(e.target.value)}
           />
         </div>
+        
         <button type="submit" className="create-btn">
           Create Channel
         </button>
