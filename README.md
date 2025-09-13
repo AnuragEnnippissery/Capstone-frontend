@@ -1,3 +1,9 @@
+#Modules
+This project has 
+1.Authentication
+2.Home
+3.Video Player
+4.Channel
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
