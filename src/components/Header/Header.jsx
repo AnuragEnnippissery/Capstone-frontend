@@ -9,92 +9,78 @@ import { TbFileLike } from "react-icons/tb";
 import { useState, useEffect } from "react";
 
 function Header() {
-  let navigate = useNavigate();
-  const [collapsed, setCollapsed] = useState(window.innerWidth <= 1024);
+  const navigate = useNavigate();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [user, setUser] = useState("");
   const [popupOpen, setPopupOpen] = useState(false);
 
+  // ✅ Handle user login state
   useEffect(() => {
     function checkUser() {
       const storedUser = sessionStorage.getItem("username");
-      setUser(storedUser);
+      setUser(storedUser || "");
     }
-
-    checkUser(); // run on mount
+    checkUser();
     window.addEventListener("storage", checkUser);
-
-    return () => {
-      window.removeEventListener("storage", checkUser);
-    };
+    return () => window.removeEventListener("storage", checkUser);
   }, []);
 
-    // ✅ Auto close popup after 3 seconds
-    useEffect(() => {
-      let timer;
-      if (popupOpen) {
-        timer = setTimeout(() => {
-          setPopupOpen(false);
-        }, 5000); // 5 seconds
-      }
-      return () => clearTimeout(timer);
-    }, [popupOpen]);
-      // collapsed = true means sidebar is hidden
-  // const [collapsed, setCollapsed] = useState(window.innerWidth <= 1024);
-
+  // ✅ Auto close popup after 5s
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 1024) {
-        setCollapsed(true);   // hide sidebar on mobile/tablet
-      } else {
-        setCollapsed(false);  // show sidebar on desktop
-      }
-    };
+    let timer;
+    if (popupOpen) {
+      timer = setTimeout(() => setPopupOpen(false), 5000);
+    }
+    return () => clearTimeout(timer);
+  }, [popupOpen]);
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
+  // ✅ Navigation functions
   function HandleClick() {
     navigate('/Login');
   }
-  function HandleChannel(){
-    navigate("/channel/channelForm")
+  function HandleChannel() {
+    navigate("/channel/channelForm");
   }
-  function HandleMainChannel(){
-    navigate("/Channel")
+  function HandleMainChannel() {
+    navigate("/Channel");
   }
   function HandleSignOut() {
     sessionStorage.removeItem("id");
     sessionStorage.removeItem("username");
     sessionStorage.removeItem("token");
-
     window.dispatchEvent(new Event("storage")); 
     navigate('/Login');
   }
 
   return (
     <div>
+      {/* Top Nav */}
       <div className="top-nav">
-        <h2>Youtube</h2>
+        <div className="left-section">
+          <button 
+            className="hamburger" 
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+          >
+            <FiMenu size={24} />
+          </button>
+          <h2>Youtube</h2>
+        </div>
+
         <div className="user">
           {user ? (
             <div className="avatar-wrapper">
-              {/* Avatar circle */}
               <div 
                 className="avatar" 
                 onClick={() => setPopupOpen(!popupOpen)}
               >
                 {user.charAt(0).toUpperCase()}
               </div>
-
-              {/* Popup */}
               {popupOpen && (
                 <div className="popup">
                   <p>Hello, {user}!</p>
                   <button onClick={HandleMainChannel}>View Channel</button>
                   <button onClick={HandleChannel}>Create a Channel</button>
                   <button onClick={HandleSignOut}>Sign Out</button>
-                  
                 </div>
               )}
             </div>
@@ -104,71 +90,71 @@ function Header() {
         </div>
       </div>
 
+      {/* Sidebar + Content */}
       <div className="container">
-        <nav className={`Navbar ${collapsed ? "collapsed" : ""}`}>
-          <button className="hamburger" onClick={() => {setCollapsed(!collapsed)}}>
-            
-            <FiMenu size={24} />
-          </button>
+        <nav className={`Navbar ${sidebarOpen ? "open" : ""}`}>
           <ul className="list">
             <li className="list-items">
               <Link to="/">
                 <AiFillHome size={20} style={{ marginRight: "8px" }} />
-                {!collapsed && <span className="label">Home</span>}
+                <span className="label">Home</span>
               </Link>
             </li>
             <li className="list-items">
               <Link to="/?filter=shorts">
                 <BiMoviePlay size={20} style={{ marginRight: "8px" }} />
-                {!collapsed && <span className="label">Shorts</span>}
+                <span className="label">Shorts</span>
               </Link>
             </li>
             <li className="list-items">
               <Link to="/Channel">
                 <MdSubscriptions size={20} style={{ marginRight: "8px" }} />
-                {!collapsed && <span className="label">Subscription</span>}
+                <span className="label">Subscription</span>
               </Link>
             </li>
-
-            {!collapsed && (
-              <>
-                <hr /> 
-                <li className="list-items">
-                  <Link to="/">
-                    <MdWorkHistory size={20} style={{ marginRight: "8px" }} />
-                    <span className="label">History</span>
-                  </Link>
-                </li>
-                <li className="list-items">
-                  <Link to="/">
-                    <RiPlayListAddFill size={20} style={{ marginRight: "8px" }} />
-                    <span className="label">Playlists</span>
-                  </Link>
-                </li>
-                <li className="list-items">
-                  <Link to="/">
-                    <MdWatchLater size={20} style={{ marginRight: "8px" }} />
-                    <span className="label">Watch Later</span>
-                  </Link>
-                </li>
-                <li className="list-items">
-                  <Link to="/">
-                    <TbFileLike size={20} style={{ marginRight: "8px" }} />
-                    <span className="label">Liked Videos</span>
-                  </Link>
-                </li>
-                <p>Trending </p>
-                <hr />
-                <li className="list-items">
-                  <Link to="/">
-                    <MdSubscriptions size={20} style={{ marginRight: "8px" }} />
-                    <span className="label">Trending</span>
-                  </Link>
-                </li>
-              </>
-            )}
+            <hr /> 
+            <li className="list-items">
+              <Link to="/">
+                <MdWorkHistory size={20} style={{ marginRight: "8px" }} />
+                <span className="label">History</span>
+              </Link>
+            </li>
+            <li className="list-items">
+              <Link to="/">
+                <RiPlayListAddFill size={20} style={{ marginRight: "8px" }} />
+                <span className="label">Playlists</span>
+              </Link>
+            </li>
+            <li className="list-items">
+              <Link to="/">
+                <MdWatchLater size={20} style={{ marginRight: "8px" }} />
+                <span className="label">Watch Later</span>
+              </Link>
+            </li>
+            <li className="list-items">
+              <Link to="/">
+                <TbFileLike size={20} style={{ marginRight: "8px" }} />
+                <span className="label">Liked Videos</span>
+              </Link>
+            </li>
+            <p>Trending </p>
+            <hr />
+            <li className="list-items">
+              <Link to="/">
+                <MdSubscriptions size={20} style={{ marginRight: "8px" }} />
+                <span className="label">Trending</span>
+              </Link>
+            </li>
           </ul>
         </nav>
+
+        {/* Dark overlay when sidebar open */}
+        {sidebarOpen && (
+          <div 
+            className="overlay"
+            onClick={() => setSidebarOpen(false)}
+          ></div>
+        )}
 
         <div className="content">
           <Outlet />

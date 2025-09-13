@@ -5,3 +5,20 @@
     gap:10px;
     padding:20px;
 }
+.searchbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}
+
+.searchbar input {
+  width: 300px;      /* larger input box */
+  padding: 8px 12px;
+}
+
+.searchbar button {
+  padding: 8px 16px;
+  cursor: pointer;
+}

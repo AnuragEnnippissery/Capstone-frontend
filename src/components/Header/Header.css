@@ -1,105 +1,30 @@
-.Navbar{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 200px;
-    /* background-color: aqua; */
-}
-.list{
-    display:flex;
-    flex-direction: column;
-    padding:0px;
-    margin:0px;
-}
-.list-items{
-    padding: 10px;
-    margin:10px;
-    
-}
-.Navbar a {
-    text-decoration: none;
-    color: inherit;
-}
-.Navbar li {
-    list-style: none;
-}
-.top-nav{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: lightblue;
-}
-.container {
+/* ========== TOP NAV ========== */
+.top-nav {
   display: flex;
-  margin-top: 10px; /* push below fixed top-nav */
-  /* height: calc(100vh - 60px); */
-}
-.content {
-  flex: 1;
-  padding: 20px;
-  overflow-y: auto; /* scroll if needed */
-  transition: margin-left 0.3s ease;
-}
-.Navbar.collapsed {
-  width: 70px;
-}
-
-/* Hamburger button */
-.hamburger {
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin-bottom: 20px;
-  color: black;
-}
-.content-collapsed {
-  margin-left: 70px;
-}
-.user{
-    width:60px;
-}
-hr {
-  border: none;
-  border-top: 1px solid #ccc; /* light gray line */
-  margin: 8px 0;              /* spacing above & below */
+  justify-content: space-between;
+  align-items: center;
+  background-color: lightblue;
+  padding: 10px 20px;
+  height: 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001;
 }
 
-/* Tablet & mobile responsiveness */
-@media (max-width: 1024px) {
-  .Navbar {
-    position: fixed;
-    top: 50px;          /* below your top-nav */
-    left: -200px;       /* hidden off-screen */
-    height: 100vh;
-    background-color: white;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    transition: left 0.3s ease;
-    z-index: 1000;
-  }
-
-  .Navbar.collapsed {
-    left: 0;            /* slide in when toggled */
-    width: 200px;
-  }
-
-  .hamburger {
-    display: block;     /* show hamburger only on smaller screens */
-  }
-
-  .content {
-    margin-left: 0 !important; /* don’t push content when sidebar is hidden */
-  }
+.left-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
-/* Small mobile tweaks */
-@media (max-width: 600px) {
-  .list-items {
-    padding: 8px;
-    margin: 6px;
-  }
-  .label {
-    font-size: 14px;
-  }
+/* User + Avatar */
+.user {
+  width: 60px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .avatar-wrapper {
@@ -108,7 +33,7 @@ hr {
 }
 
 .avatar {
-  background-color:lightgreen;
+  background-color: lightgreen;
   color: black;
   width: 40px;
   height: 40px;
@@ -131,17 +56,99 @@ hr {
   border-radius: 8px;
   box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
   z-index: 10;
-  width:150px;
+  width: 150px;
 }
-@media (max-width: 1024px) {
-  .hamburger {
-    display: block;     
-    position: fixed;    /* stick to viewport */
-    top: 60px;          /* just below your .top-nav (adjust if nav height changes) */
-    left: 10px;         /* stick to the left edge */
+
+/* ========== MAIN LAYOUT ========== */
+.container {
+  display: flex;
+  margin-top: 50px; /* push content below top-nav */
+}
+
+/* ========== SIDEBAR ========== */
+.Navbar {
+  position: fixed;
+  top: 50px;
+  left: -200px; /* hidden by default */
+  width: 200px;
+  height: 100vh;
+  background-color: white;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  transition: left 0.3s ease;
+  z-index: 1002;
+}
+.Navbar.open {
+  left: 0; /* slide in */
+}
+
+/* Sidebar list */
+.list {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+}
+.list-items {
+  padding: 10px;
+  margin: 10px;
+  transition: background 0.2s;
+}
+.list-items:hover {
+  background: #f0f0f0;
+  border-radius: 8px;
+}
+.Navbar a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+}
+.Navbar li {
+  list-style: none;
+}
+
+/* Hamburger */
+.hamburger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: black;
+}
+
+/* ========== CONTENT ========== */
+.content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  transition: margin-left 0.3s ease;
+  margin-left: 0;
+}
+
+/* Dark overlay */
+.overlay {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+}
+
+/* Divider lines */
+hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 8px 0;
+}
+
+/* Small mobile tweaks */
+@media (max-width: 600px) {
+  .list-items {
     padding: 8px;
-    background: white;  /* give it a background so it’s visible */
-    border-radius: 6px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    margin: 6px;
+  }
+  .label {
+    font-size: 14px;
   }
 }
