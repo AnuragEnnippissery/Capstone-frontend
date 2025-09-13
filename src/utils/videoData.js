@@ -101,6 +101,36 @@ export async function deleteVideo(id) {
   return await res.json();
 }
 
+export async function likeVideo(id) {
+  const token = sessionStorage.getItem("token");
+  const res = await fetch(`http://localhost:3100/api/videos/${id}/likes`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ likes: 1 }),  // ✅ FIXED
+  });
+  if (!res.ok) throw new Error("Failed to like");
+  return await res.json();
+}
+
+export async function dislikeVideo(id) {
+  const token = sessionStorage.getItem("token");
+  const res = await fetch(`http://localhost:3100/api/videos/${id}/likes`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ dislikes: 1 }),  // ✅ FIXED
+  });
+  if (!res.ok) throw new Error("Failed to dislike");
+  return await res.json();
+}
+
+
+
 
 
 export default useGetData;

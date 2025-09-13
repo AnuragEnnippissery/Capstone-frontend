@@ -8,6 +8,7 @@ import { setComments,createComment,updateComment, deleteComment } from "../../ut
 import { useEffect,useState } from "react";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import { likeVideo,dislikeVideo } from "../../utils/videoData";
 
 function DisplayPage() {
   const { id } = useParams();
@@ -55,6 +56,36 @@ useEffect(() => {
   const [editingId, setEditingId] = useState(null);
   const [editText, setEditText] = useState("");
 
+  const [likes, setLikes] = useState(video?.likes || 0);
+  const [dislikes, setDislikes] = useState(video?.dislikes || 0);
+
+  useEffect(() => {
+    if (video) {
+      setLikes(video.likes);
+      setDislikes(video.dislikes);
+    }
+  }, [video]);
+
+  async function handleLike() {
+  try {
+    const updated = await likeVideo(id);
+    setLikes(updated.likes ?? 0);
+    setDislikes(updated.dislikes ?? 0);
+  } catch (err) {
+    console.error("Failed to like", err);
+  }
+}
+
+async function handleDislike() {
+  try {
+    const updated = await dislikeVideo(id);
+    setLikes(updated.likes ?? 0);
+    setDislikes(updated.dislikes ?? 0);
+  } catch (err) {
+    console.error("Failed to dislike", err);
+  }
+}
+
   async function HandleEdit(commentId) {
   if (!editText.trim()) return;
 
@@ -79,6 +110,7 @@ useEffect(() => {
         alert("failed to delete");
       }
   }
+
   return (
     <div className="display-container">
       {video ? (
@@ -118,12 +150,12 @@ useEffect(() => {
                 </div>
 
                 <div className="likes-section">
-                  <p >
-                    <BiLike /> {video.likes}
-                  </p>
-                  <p>
-                    <BiDislike /> {video.dislikes}
-                  </p>
+                  <button onClick={handleLike}>
+                    <BiLike /> {likes}
+                  </button>
+                  <button onClick={handleDislike}>
+                    <BiDislike /> {dislikes}
+                  </button>
                 </div>
               </div>
 

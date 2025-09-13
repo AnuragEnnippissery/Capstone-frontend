@@ -106,7 +106,8 @@ function Header() {
 
       <div className="container">
         <nav className={`Navbar ${collapsed ? "collapsed" : ""}`}>
-          <button className="hamburger" onClick={() => setCollapsed(!collapsed)}>
+          <button className="hamburger" onClick={() => {setCollapsed(!collapsed)}}>
+            
             <FiMenu size={24} />
           </button>
           <ul className="list">
