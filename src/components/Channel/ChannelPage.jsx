@@ -82,10 +82,12 @@ function ChannelPage() {
 
           {/* Videos Section */}
           <h2>Videos</h2>
+          <button onClick={HandleVideo}>create more video</button>
           <div className="video-collection">
             {channel.videos && channel.videos.length > 0 ? (
               videos.map((video) => (
-                <ul>
+                <>
+                  <ul>
                 <li key={video._id} className="video-card">
                   <img
                     src={video.thumbnailUrl}
@@ -98,6 +100,9 @@ function ChannelPage() {
                   <button onClick={()=>handleDelete(video._id)}>{<MdDelete/>}</button>
                 </li>
                 </ul>
+                
+                </>
+                
               ))
             ) : (
               <>
