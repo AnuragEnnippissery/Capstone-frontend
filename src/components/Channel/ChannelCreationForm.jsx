@@ -27,7 +27,7 @@ function ChannelCreationForm() {
         description,
         channelBanner: banner,
         owner: userId, // ✅ use userId instead of storedUser
-        videoUrl
+        //videoUrl
       });
       console.log("Channel created:", newChannel);
       navigate("/channel");
