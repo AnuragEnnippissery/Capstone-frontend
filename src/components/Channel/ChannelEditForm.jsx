@@ -26,7 +26,7 @@ function ChannelEditForm() {
     async function fetchChannel() {
       try {
         const token = sessionStorage.getItem("token");
-        const res = await fetch(`http://localhost:3100/api/channel/${id}`, {
+        const res = await fetch(`https://capstone-backend-xhtk.onrender.com/api/channel/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!res.ok) throw new Error("Failed to fetch channel");

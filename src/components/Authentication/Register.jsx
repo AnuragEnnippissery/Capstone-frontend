@@ -11,7 +11,7 @@ function Register(){
         console.log("password",password);
 
        //let res=
-       await fetch("http://localhost:3100/api/user/register", {
+       await fetch("https://capstone-backend-xhtk.onrender.com/api/user/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

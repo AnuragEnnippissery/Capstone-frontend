@@ -11,7 +11,7 @@ function Login() {
   async function HandleLogin() {
     setError(""); // clear old error
     try {
-      const res = await fetch("http://localhost:3100/api/user/login", {
+      const res = await fetch("https://capstone-backend-xhtk.onrender.com/api/user/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),

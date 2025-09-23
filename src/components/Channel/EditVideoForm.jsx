@@ -15,7 +15,7 @@ function EditVideoForm() {
     async function fetchVideo() {
       try {
         const token = sessionStorage.getItem("token");
-        const res = await fetch(`http://localhost:3100/api/video/${id}`, {
+        const res = await fetch(`https://capstone-backend-xhtk.onrender.com/api/video/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!res.ok) throw new Error("Failed to fetch video");

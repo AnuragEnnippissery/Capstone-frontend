@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3100/api/comment";
+const API_URL = "https://capstone-backend-xhtk.onrender.com/api/comment";
 
 // Get token from sessionStorage (or wherever you store it)
 const getAuthConfig = () => {

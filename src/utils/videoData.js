@@ -7,7 +7,7 @@ function useGetData() {
     async function fetchData() {
       try {
         const token = sessionStorage.getItem("token");
-        const res = await fetch("http://localhost:3100/api/videos", {
+        const res = await fetch("https://capstone-backend-xhtk.onrender.com/api/videos", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -32,7 +32,7 @@ export function useGetSingleVideo(id) {
     async function fetchVideo() {
       try {
         const token = sessionStorage.getItem("token");
-        const res = await fetch(`http://localhost:3100/api/video/${id}`, {
+        const res = await fetch(`https://capstone-backend-xhtk.onrender.com/api/video/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -56,7 +56,7 @@ export async function createVideo(videoData) {
   try {
     const token = sessionStorage.getItem("token");
 
-    const res = await fetch("http://localhost:3100/api/videos/add", {
+    const res = await fetch("https://capstone-backend-xhtk.onrender.com/api/videos/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -76,7 +76,7 @@ export async function createVideo(videoData) {
 //edit video 
 export async function updateVideo(id, updatedData) {
   const token = sessionStorage.getItem("token");
-  const res = await fetch(`http://localhost:3100/api/videos/update/${id}`, {
+  const res = await fetch(`https://capstone-backend-xhtk.onrender.com/api/videos/update/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -91,7 +91,7 @@ export async function updateVideo(id, updatedData) {
 // videoData.js
 export async function deleteVideo(id) {
   const token = sessionStorage.getItem("token");
-  const res = await fetch(`http://localhost:3100/api/videos/delete/${id}`, {
+  const res = await fetch(`https://capstone-backend-xhtk.onrender.com/api/videos/delete/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -103,7 +103,7 @@ export async function deleteVideo(id) {
 
 export async function likeVideo(id) {
   const token = sessionStorage.getItem("token");
-  const res = await fetch(`http://localhost:3100/api/videos/${id}/likes`, {
+  const res = await fetch(`hhttps://capstone-backend-xhtk.onrender.com/api/videos/${id}/likes`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -117,7 +117,7 @@ export async function likeVideo(id) {
 
 export async function dislikeVideo(id) {
   const token = sessionStorage.getItem("token");
-  const res = await fetch(`http://localhost:3100/api/videos/${id}/likes`, {
+  const res = await fetch(`https://capstone-backend-xhtk.onrender.com/api/videos/${id}/likes`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

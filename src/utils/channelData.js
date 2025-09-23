@@ -33,7 +33,7 @@ export function useGetMyChannel() {
         const token = sessionStorage.getItem("token");
         console.log("token",token)
 
-        const res = await fetch("http://localhost:3100/api/channel/mychannel", {
+        const res = await fetch("https://capstone-backend-xhtk.onrender.com/api/channel/mychannel", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -59,7 +59,7 @@ export async function createChannel(channelData) {
   try {
     const token = sessionStorage.getItem("token");
 
-    const res = await fetch("http://localhost:3100/api/channel/add", {
+    const res = await fetch("https://capstone-backend-xhtk.onrender.com/api/channel/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -79,7 +79,7 @@ export async function createChannel(channelData) {
 //edit channel
 export async function updateChannel(id, updatedData) {
   const token = sessionStorage.getItem("token");
-  const res = await fetch(`http://localhost:3100/api/channel/update/${id}`, {
+  const res = await fetch(`https://capstone-backend-xhtk.onrender.com/api/channel/update/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -94,7 +94,7 @@ export async function updateChannel(id, updatedData) {
 // delete channel
 export async function deleteChannel(id) {
   const token = sessionStorage.getItem("token");
-  const res = await fetch(`http://localhost:3100/api/channel/delete/${id}`, {
+  const res = await fetch(`https://capstone-backend-xhtk.onrender.com/api/channel/delete/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`,
