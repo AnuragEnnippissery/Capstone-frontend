@@ -20,7 +20,7 @@ function Login() {
       const data = await res.json();
       console.log("Response from server:", data);
 
-      if (res.ok) {
+      if (res.ok && data.token) {
         // ✅ login success
         sessionStorage.setItem("username", username);
         sessionStorage.setItem("id", data.id);
