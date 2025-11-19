@@ -28,19 +28,31 @@ const appRouter = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
+      // Default page (loads Home on website open)
+      { 
+        index: true,
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Home />
+          </Suspense>
+        )
+      },
+
       // Public routes
       { path: '/Login', element: <Suspense fallback={<div>Loading...</div>}><Login /></Suspense> },
       { path: '/Register', element: <Suspense fallback={<div>Loading...</div>}><Register /></Suspense> },
+     // { path: '/', element: <Suspense fallback={<div>Loading...</div>}><Home /></Suspense> },
+
 
       // Protected routes
-      {
-        path: '/',
-        element: (
-          <ProtectedRoute>
-            <Suspense fallback={<div>Loading...</div>}><Home /></Suspense>
-          </ProtectedRoute>
-        ),
-      },
+      // {
+      //   path: '/',
+      //   element: (
+      //     <ProtectedRoute>
+      //       <Suspense fallback={<div>Loading...</div>}><Home /></Suspense>
+      //     </ProtectedRoute>
+      //   ),
+      // },
       {
         path: '/VideoPlayer/:id',
         element: (
